@@ -15,6 +15,10 @@ const fruits=["Orange", "Apple","Mango"]
 
 // file system
 
+// body
+app.use(express.json())
+
+
 
 
 //endpoints
@@ -86,9 +90,69 @@ if(products.length ==0) {
 
 
 // 2. query parameter (optional Ikhtiari)
+app.get('/theme', (req, res) => {
+//exception handling
+try {
+
+let color = req.query.color
+
+if (color) {
+  res.json({msg:`Your theme is set to ${color}`})
+  
+} else {
+    res.json({msg:`Your theme is set to dark`})
+  
+}
+
+
+
+} catch (error) {
+  console.log(error)
+  res.status(500).json({error:error.msessage})
+}
+})
+
+
+
 // 3. request body 
+//body parser (built in middleware)
+
+app.post('/welcome', (req, res) => {
+//exception handling
+try {
+
+let name = req.body.name
+
+if (name) {
+  res.json({msg:`welcome ${name}`})
+  
+} else {
+    res.json({msg:`can't get your name mate`})
+  
+}
+} catch (error) {
+  console.log(error)
+  res.status(500).json({error:error.msessage})
+}
+})
 
 
+// add product api
+app.post('/product', (req, res) => {
+//exception handling
+try {
+let product = req.body
+if (product) {
+  products.push(product)
+  res.json({msg:`New Product added successfully`,product:product})
+} else {
+    res.json({msg:`Can't add product right now`}) 
+}
+} catch (error) {
+  console.log(error)
+  res.status(500).json({error:error.msessage})
+}
+})
 
 
 app.listen(port, () => {

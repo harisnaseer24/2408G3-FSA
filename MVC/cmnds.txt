@@ -1,0 +1,11 @@
+
+npm init -y
+npm i express
+npm i nodemon
+
+
+ node filename
+ nodemon filename
+
+ request methods (GET, POST, PUT, PATCH, DELETE, HEAD)
+ response code (200 ,300, 404, 401,500)
