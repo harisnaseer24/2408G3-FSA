@@ -10,5 +10,6 @@ productRouter
 .get("/:id",productController.getSingleProduct)
 .post("/",productController.addProduct)
 .delete("/:id",productController.deleteProduct)
+.put("/:id",productController.updateProduct)
 
 export default productRouter;

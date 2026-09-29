@@ -13,7 +13,7 @@ app.use(express.json())
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://harisnaseer:IToOATRQGWa25z7A@cluster0.h4gftvt.mongodb.net/?appName=Cluster0');
+  await mongoose.connect('mongodb+srv://harisnaseer:IToOATRQGWa25z7A@cluster0.h4gftvt.mongodb.net/2408g3');
 console.log("connected successfully")
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
