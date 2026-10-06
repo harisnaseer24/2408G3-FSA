@@ -1,6 +1,7 @@
 import express from 'express';
 import productRouter from './router/productRouter.mjs';
 import mongoose from 'mongoose';
+import userRouter from './router/userRouter.mjs';
 
 
 
@@ -13,7 +14,7 @@ app.use(express.json())
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://harisnaseer:IToOATRQGWa25z7A@cluster0.h4gftvt.mongodb.net/2408g3');
+  await mongoose.connect('mongodb+srv://harisnaseer:IToOATRQGWa25z7A@cluster0.h4gftvt.mongodb.net/2408G3');
 console.log("connected successfully")
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/product",productRouter);
+app.use("/user",userRouter);
 
 
 
