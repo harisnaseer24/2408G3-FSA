@@ -4,6 +4,7 @@ npm i express
 npm i nodemon
 
 npm i bcryptjs
+npm i dotenv
 
 
  node filename
