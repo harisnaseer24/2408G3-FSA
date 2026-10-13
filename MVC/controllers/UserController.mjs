@@ -1,6 +1,7 @@
 
 import User from '../models/userModel.mjs';
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 //all products
 const Signup = async (req, res) => {
@@ -45,10 +46,70 @@ try {
 }
 
 
+//login 10-10-26
+
+const Login = async (req, res) => {
+//exception handling
+try {
+    const data = req.body;
+    const checkUser= await User.findOne({email: data.email})
+
+    if (checkUser.length == 0) {
+        res.status(200).json({msg:"Account does not exists. Please Signup"})
+        
+    } else {
+//                                                string              hash
+        const verifyPassword= bcrypt.compareSync(data.password, checkUser.password);
+        if (verifyPassword) {
+
+              const token = await jwt.sign( {checkUser} , process.env.JWT_SECRET, {
+          expiresIn: "24h",
+        });
+        console.log(token);
+
+
+            res.status(200).json({msg:"Login Success..!", user:checkUser,token:token})    
+            } else {
+            res.status(200).json({msg:"Invalid Credentials . Please try again..!"}) 
+        }
+    }
+
+} catch (error) {
+  console.log(error)
+  res.status(500).json({error:error.msessage})
+}
+}
+
+
+//change activation status
+const ChangeActivationStatus = async (req, res) => {
+//exception handling
+try {
+
+const userId= req.params.id;
+const status= req.query.status=="active" ? true : false;
+
+const updateUser = await User.updateOne({_id:userId},{isActive:status});
+    if (updateUser) {
+        res.status(200).json({msg:"Account status updated successfully"})
+        
+    } else {
+        res.status(200).json({msg:"Failed to update account status"})
+                                           
+    }
+
+
+} catch (error) {
+  console.log(error)
+  res.status(500).json({error:error.msessage})
+}
+}
 
 
 const userController ={
     Signup,
+    Login,
+    ChangeActivationStatus
    
 }
 
