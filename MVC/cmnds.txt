@@ -6,6 +6,8 @@ npm i nodemon
 npm i mongoose
 npm i bcryptjs
 npm i dotenv
+npm i nodemailer
+npm i cloudinary multer multer-storage-cloudinary
 
 
  node filename

@@ -54,6 +54,50 @@ images: product.images,
 }
 }
 
+//add product
+const addProductWithImage = async (req, res) => {
+//exception handling
+try {
+  console.log(req.file.path)
+let product = req.body
+if (product) {
+
+  // object mapping
+  const newProduct= Product({
+title: product.title,
+description: product.description,
+price: product.price,
+discount: product.discount,
+rating: product.rating,
+stock: product.stock,
+brand: product.brand,
+category: product.category,
+images: [
+  req.file.path
+],
+
+  })
+
+  const addProduct = await newProduct.save();
+  if(addProduct){
+    
+    res.json({msg:`New Product added successfully`,product:addProduct})
+  }else{
+
+    res.json({msg:`Can't add product right now`}) 
+  }
+
+} else {
+   res.json({msg:`Can't add product right now`}) 
+}
+} catch (error) {
+  console.log(error)
+  res.status(500).json({error:error.msessage})
+}
+}
+
+
+
 
 // 03241257793
 //add product
@@ -171,7 +215,8 @@ const productController ={
     getSingleProduct,
     addProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    addProductWithImage
 }
 
 export default productController;
