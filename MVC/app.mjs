@@ -3,13 +3,18 @@ import productRouter from './router/productRouter.mjs';
 import mongoose from 'mongoose';
 import userRouter from './router/userRouter.mjs';
 import dotenv from 'dotenv'
+import cors from 'cors'
 
 dotenv.config();
 
 const app = express()
 const port = process.env.PORT;
 
-app.use(express.json())
+//middelware
+app.use(express.json()) //body parser
+
+//configure your frontend url in cors(url)
+app.use(cors())
 
 //db connection
 main().catch(err => console.log(err));

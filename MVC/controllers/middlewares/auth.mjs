@@ -5,6 +5,7 @@ dotenv.config()
  const auth = async(req,res, next)=>{
 
    try {
+    
      const authHeader= req.headers.authorization
     if(!authHeader || !authHeader.startsWith('Bearer ')){
         res.status(400).json({message:"No authentication token found...!"})

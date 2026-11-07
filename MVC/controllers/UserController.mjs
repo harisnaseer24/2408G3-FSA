@@ -24,10 +24,10 @@ try {
         console.log(hashPassword)
 
         const newUser= User({
-            username:data.username,
+            username:data.name,
             email:data.email,
             password:hashPassword,
-            profilePicture:data.profilePicture
+            profilePicture:"user.png"
         })
         const addUser = await newUser.save();
         if (addUser) {
