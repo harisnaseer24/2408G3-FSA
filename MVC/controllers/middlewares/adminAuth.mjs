@@ -13,6 +13,7 @@ dotenv.config()
     const token= authHeader.split(" ")[1]
 
     const decode= await jwt.verify(token,process.env.JWT_SECRET);
+    next();
    
 } catch (error) {
      res.status(500).json({message:error})
